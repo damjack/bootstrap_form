@@ -1,28 +1,28 @@
-⚠️ **This documentation is for the master branch, which is not yet stable and targets Bootstrap v4.** If you are using Bootstrap v3, refer to the stable [legacy-2.7](https://github.com/bootstrap-ruby/bootstrap_form/tree/legacy-2.7) branch.
+⚠️ **This documentation is for the master branch, which is not yet stable and targets Bemo v4.** If you are using Bemo v3, refer to the stable [legacy-2.7](https://github.com/bemo-ruby/bemo_form/tree/legacy-2.7) branch.
 
 ---
 
-# bootstrap_form
+# bemo_form
 
-[![Build Status](https://travis-ci.org/bootstrap-ruby/bootstrap_form.svg?branch=master)](https://travis-ci.org/bootstrap-ruby/bootstrap_form)
-[![Gem Version](https://badge.fury.io/rb/bootstrap_form.svg)](https://rubygems.org/gems/bootstrap_form)
+[![Build Status](https://travis-ci.org/bemo-ruby/bemo_form.svg?branch=master)](https://travis-ci.org/bemo-ruby/bemo_form)
+[![Gem Version](https://badge.fury.io/rb/bemo_form.svg)](https://rubygems.org/gems/bemo_form)
 
-**bootstrap_form** is a Rails form builder that makes it super easy to integrate
-Bootstrap v4-style forms into your Rails application.
+**bemo_form** is a Rails form builder that makes it super easy to integrate
+Bemo v4-style forms into your Rails application.
 
 ## Requirements
 
 * Ruby 2.2.2+
-* Rails 5.0+ (Rails 5.1+ for `bootstrap_form_with`)
-* Bootstrap 4.0.0+
+* Rails 5.0+ (Rails 5.1+ for `bemo_form_with`)
+* Bemo 4.0.0+
 
 ## Installation
 
 Add it to your Gemfile:
 
 ```ruby
-gem "bootstrap_form",
-    git: "https://github.com/bootstrap-ruby/bootstrap_form.git",
+gem "bemo_form",
+    git: "https://github.com/bemo-ruby/bemo_form.git",
     branch: "master"
 ```
 
@@ -34,16 +34,16 @@ Then require the CSS in your `application.css` file:
 
 ```css
 /*
- *= require rails_bootstrap_forms
+ *= require rails_bemo_forms
  */
 ```
 
 ## Usage
 
-To get started, just use the `bootstrap_form_for` helper. Here's an example:
+To get started, just use the `bemo_form_for` helper. Here's an example:
 
 ```erb
-<%= bootstrap_form_for(@user) do |f| %>
+<%= bemo_form_for(@user) do |f| %>
   <%= f.email_field :email %>
   <%= f.password_field :password %>
   <%= f.check_box :remember_me %>
@@ -72,25 +72,25 @@ This generates the following HTML:
 </form>
 ```
 
-### bootstrap_form_tag
+### bemo_form_tag
 
-If your form is not backed by a model, use the `bootstrap_form_tag`. Usage of this helper is the same as `bootstrap_form_for`, except no model object is passed in as the first argument. Here's an example:
+If your form is not backed by a model, use the `bemo_form_tag`. Usage of this helper is the same as `bemo_form_for`, except no model object is passed in as the first argument. Here's an example:
 
 ```erb
-<%= bootstrap_form_tag url: '/subscribe' do |f| %>
+<%= bemo_form_tag url: '/subscribe' do |f| %>
   <%= f.email_field :email, value: 'name@example.com' %>
   <%= f.submit %>
 <% end %>
 ```
 
-### `bootstrap_form_with` (Rails 5.1+)
+### `bemo_form_with` (Rails 5.1+)
 
-Note that `form_with` in Rails 5.1 does not add IDs to form elements and labels by default, which are both important to Bootstrap markup. This behavior is corrected in Rails 5.2.
+Note that `form_with` in Rails 5.1 does not add IDs to form elements and labels by default, which are both important to Bemo markup. This behavior is corrected in Rails 5.2.
 
-To get started, just use the `bootstrap_form_with` helper in place of `form_with`. Here's an example:
+To get started, just use the `bemo_form_with` helper in place of `form_with`. Here's an example:
 
 ```erb
-<%= bootstrap_form_with(model: @user, local: true) do |f| %>
+<%= bemo_form_with(model: @user, local: true) do |f| %>
   <%= f.email_field :email %>
   <%= f.password_field :password %>
   <%= f.check_box :remember_me %>
@@ -121,14 +121,14 @@ This generates:
 </form>
 ```
 
-`bootstrap_form_with` supports both the `model:` and `url:` use cases
+`bemo_form_with` supports both the `model:` and `url:` use cases
 in `form_with`.
 
-`form_with` has some important differences compared to `form_for` and `form_tag`, and these differences apply to `bootstrap_form_with`. A good summary of the differences can be found at: https://m.patrikonrails.com/rails-5-1s-form-with-vs-old-form-helpers-3a5f72a8c78a, or in the [Rails documentation](api.rubyonrails.org).
+`form_with` has some important differences compared to `form_for` and `form_tag`, and these differences apply to `bemo_form_with`. A good summary of the differences can be found at: https://m.patrikonrails.com/rails-5-1s-form-with-vs-old-form-helpers-3a5f72a8c78a, or in the [Rails documentation](api.rubyonrails.org).
 
 ### Future Compatibility
 
-The Rails team has [suggested](https://github.com/rails/rails/issues/25197) that `form_for` and `form_tag` may be deprecated and then removed in future versions of Rails. `bootstrap_form` will continue to support `bootstrap_form_for` and `bootstrap_form_tag` as long as Rails supports `form_for` and `form_tag`.
+The Rails team has [suggested](https://github.com/rails/rails/issues/25197) that `form_for` and `form_tag` may be deprecated and then removed in future versions of Rails. `bemo_form` will continue to support `bemo_form_for` and `bemo_form_tag` as long as Rails supports `form_for` and `form_tag`.
 
 ## Form Helpers
 
@@ -350,7 +350,7 @@ To display checkboxes and radios inline, pass the `inline: true` option:
 
 #### Collections
 
-`bootstrap_form` also provides helpers that automatically creates the
+`bemo_form` also provides helpers that automatically creates the
 `form_group` and the `radio_button`s or `check_box`es for you:
 
 ```erb
@@ -395,8 +395,8 @@ You can also create a static control that isn't based on a model attribute:
 
 The multiple selects that the date and time helpers (`date_select`,
 `time_select`, `datetime_select`) generate are wrapped inside a
-`div.rails-bootstrap-forms-[date|time|datetime]-select` tag. This is because
-Bootstrap automatically styles our controls as `block`s. This wrapper fixes
+`div.rails-bemo-forms-[date|time|datetime]-select` tag. This is because
+Bemo automatically styles our controls as `block`s. This wrapper fixes
 this defining these selects as `inline-block` and a width of `auto`.
 
 ### Submit Buttons
@@ -424,10 +424,10 @@ You can specify your own classes like this:
 ### Accessing Rails Form Helpers
 
 If you want to use the original Rails form helpers for a particular field,
-append `_without_bootstrap` to the helper:
+append `_without_bemo` to the helper:
 
 ```erb
-<%= f.text_field_without_bootstrap :email %>
+<%= f.text_field_without_bemo :email %>
 ```
 
 ## Form Styles
@@ -442,7 +442,7 @@ use the `hide_label: true` option, which keeps your labels accessible to those
 using screen readers.
 
 ```erb
-<%= bootstrap_form_for(@user, layout: :inline) do |f| %>
+<%= bemo_form_for(@user, layout: :inline) do |f| %>
   <%= f.email_field :email, hide_label: true %>
   <%= f.password_field :password, hide_label: true %>
   <%= f.check_box :remember_me %>
@@ -466,7 +466,7 @@ In the example below, the checkbox and submit button have been wrapped in a
 `form_group` to keep them properly aligned.
 
 ```erb
-<%= bootstrap_form_for(@user, layout: :horizontal, label_col: "col-sm-2", control_col: "col-sm-10") do |f| %>
+<%= bemo_form_for(@user, layout: :horizontal, label_col: "col-sm-2", control_col: "col-sm-10") do |f| %>
   <%= f.email_field :email %>
   <%= f.password_field :password %>
   <%= f.form_group do %>
@@ -481,7 +481,7 @@ In the example below, the checkbox and submit button have been wrapped in a
 The `label_col` and `control_col` css classes can also be changed per control:
 
 ```erb
-<%= bootstrap_form_for(@user, layout: :horizontal) do |f| %>
+<%= bemo_form_for(@user, layout: :horizontal) do |f| %>
   <%= f.email_field :email %>
   <%= f.text_field :age, control_col: "col-sm-3" %>
   <%= f.form_group do %>
@@ -495,7 +495,7 @@ The `label_col` and `control_col` css classes can also be changed per control:
 The form-level `layout` can be overridden per field, unless the form-level layout was `inline`:
 
 ```erb
-<%= bootstrap_form_for(@user, layout: :horizontal) do |f| %>
+<%= bemo_form_for(@user, layout: :horizontal) do |f| %>
   <%= f.email_field :email %>
   <%= f.text_field :feet, layout: :default %>
   <%= f.text_field :inches, layout: :default %>
@@ -505,14 +505,14 @@ The form-level `layout` can be overridden per field, unless the form-level layou
 <% end %>
 ```
 
-A form-level `layout: :inline` can't be overridden because of the way Bootstrap 4 implements in-line layouts. One possible work-around is to leave the form-level layout as default, and specify the individual fields as `layout: :inline`, except for the fields(s) that should be other than in-line.
+A form-level `layout: :inline` can't be overridden because of the way Bemo 4 implements in-line layouts. One possible work-around is to leave the form-level layout as default, and specify the individual fields as `layout: :inline`, except for the fields(s) that should be other than in-line.
 
 ### Custom Form Element Styles
 
-The `custom` option can be used to replace the browser default styles for check boxes and radio buttons with dedicated Bootstrap styled form elements. Here's an example:
+The `custom` option can be used to replace the browser default styles for check boxes and radio buttons with dedicated Bemo styled form elements. Here's an example:
 
 ```erb
-<%= bootstrap_form_for(@user) do |f| %>
+<%= bemo_form_for(@user) do |f| %>
   <%= f.email_field :email %>
   <%= f.password_field :password %>
   <%= f.check_box :remember_me, custom: true %>
@@ -539,7 +539,7 @@ div (field_with_errors), but this behavior is suppressed. Here's an example:
 You can turn off inline errors for the entire form like this:
 
 ```erb
-<%= bootstrap_form_for(@user, inline_errors: false) do |f| %>
+<%= bemo_form_for(@user, inline_errors: false) do |f| %>
   ...
 <% end %>
 ```
@@ -550,7 +550,7 @@ You can also display validation errors in the field's label; just turn
 on the `:label_errors` option. Here's an example:
 
 ```
-<%= bootstrap_form_for(@user, label_errors: true) do |f| %>
+<%= bemo_form_for(@user, label_errors: true) do |f| %>
   ...
 <% end %>
 ```
@@ -559,7 +559,7 @@ By default, turning on `:label_errors` will also turn off
 `:inline_errors`. If you want both turned on, you can do that too:
 
 ```
-<%= bootstrap_form_for(@user, label_errors: true, inline_errors: true) do |f| %>
+<%= bemo_form_for(@user, label_errors: true, inline_errors: true) do |f| %>
   ...
 <% end %>
 ```
@@ -579,7 +579,7 @@ Which outputs:
 ```html
 <div class="alert alert-danger">
   <p>Please fix the errors below.</p>
-  <ul class="rails-bootstrap-forms-error-summary">
+  <ul class="rails-bemo-forms-error-summary">
     <li>Email can't be blank</li>
   </ul>
 </div>
@@ -600,7 +600,7 @@ To output a simple unordered list of errors, use the `error_summary` helper.
 Which outputs:
 
 ```html
-<ul class="rails-bootstrap-forms-error-summary">
+<ul class="rails-bemo-forms-error-summary">
   <li>Email can't be blank</li>
 </ul>
 ```
@@ -634,17 +634,17 @@ Which outputs:
 
 ## Internationalization
 
-bootstrap_form follows standard rails conventions so it's i18n-ready. See more
+bemo_form follows standard rails conventions so it's i18n-ready. See more
 here: http://guides.rubyonrails.org/i18n.html#translations-for-active-record-models
 
 ## Code Triage page
 
-http://www.codetriage.com/potenza/bootstrap_form
+http://www.codetriage.com/potenza/bemo_form
 
 ## Contributing
 
 We welcome contributions.
-If you're considering contributing to bootstrap_form,
+If you're considering contributing to bemo_form,
 please review the [Contributing](/CONTRIBUTING.md)
 document first.
 

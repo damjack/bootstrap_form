@@ -1,7 +1,7 @@
 require_relative "./test_helper"
 
-class BootstrapSelectsTest < ActionView::TestCase
-  include BootstrapForm::Helper
+class BemoSelectsTest < ActionView::TestCase
+  include BemoForm::Helper
 
   setup :setup_test_fixture
 
@@ -36,7 +36,7 @@ class BootstrapSelectsTest < ActionView::TestCase
       </div>
     </form>
     HTML
-    assert_equivalent_xml expected, bootstrap_form_for(@user) { |f| f.time_zone_select(:misc) }
+    assert_equivalent_xml expected, bemo_form_for(@user) { |f| f.time_zone_select(:misc) }
   end
 
   test "selects are wrapped correctly" do
@@ -52,7 +52,7 @@ class BootstrapSelectsTest < ActionView::TestCase
     assert_equivalent_xml expected, @builder.select(:status, [['activated', 1], ['blocked', 2]])
   end
 
-  test "bootstrap_specific options are handled correctly" do
+  test "bemo_specific options are handled correctly" do
     expected = <<-HTML.strip_heredoc
       <div class="form-group">
         <label for="user_status">My Status Label</label>
@@ -177,7 +177,7 @@ class BootstrapSelectsTest < ActionView::TestCase
       </div>
     </form>
     HTML
-    assert_equivalent_xml expected, bootstrap_form_for(@user) { |f| f.collection_select(:status, [], :id, :name) }
+    assert_equivalent_xml expected, bemo_form_for(@user) { |f| f.collection_select(:status, [], :id, :name) }
   end
 
   test "collection_selects with options are wrapped correctly" do
@@ -226,7 +226,7 @@ class BootstrapSelectsTest < ActionView::TestCase
       </div>
     </form>
     HTML
-    assert_equivalent_xml expected, bootstrap_form_for(@user) { |f| f.grouped_collection_select(:status, [], :last, :first, :to_s, :to_s) }
+    assert_equivalent_xml expected, bemo_form_for(@user) { |f| f.grouped_collection_select(:status, [], :last, :first, :to_s, :to_s) }
   end
 
   test "grouped_collection_selects with options are wrapped correctly" do
@@ -258,7 +258,7 @@ class BootstrapSelectsTest < ActionView::TestCase
       expected = <<-HTML.strip_heredoc
         <div class="form-group">
           <label for="user_misc">Misc</label>
-          <div class="rails-bootstrap-forms-date-select">
+          <div class="rails-bemo-forms-date-select">
             <select class="form-control" id="user_misc_1i" name="user[misc(1i)]">
               #{options_range(start: 2007, stop: 2017, selected: 2012)}
             </select>
@@ -283,7 +283,7 @@ class BootstrapSelectsTest < ActionView::TestCase
         <input name="utf8" type="hidden" value="&#x2713;"/>
         <div class="form-group">
           <label for="user_misc">Misc</label>
-          <div class="rails-bootstrap-forms-date-select">
+          <div class="rails-bemo-forms-date-select">
             <select class="form-control is-invalid" id="user_misc_1i" name="user[misc(1i)]">
               #{options_range(start: 2007, stop: 2017, selected: 2012)}
             </select>
@@ -298,7 +298,7 @@ class BootstrapSelectsTest < ActionView::TestCase
         </div>
       </form>
       HTML
-      assert_equivalent_xml expected, bootstrap_form_for(@user) { |f| f.date_select(:misc) }
+      assert_equivalent_xml expected, bemo_form_for(@user) { |f| f.date_select(:misc) }
     end
   end
 
@@ -307,7 +307,7 @@ class BootstrapSelectsTest < ActionView::TestCase
       expected = <<-HTML.strip_heredoc
         <div class="form-group">
           <label for="user_misc">Misc</label>
-          <div class="rails-bootstrap-forms-date-select">
+          <div class="rails-bemo-forms-date-select">
             <select class="form-control" id="user_misc_1i" name="user[misc(1i)]">
               <option value=""></option>
               #{options_range(start: 2007, stop: 2017)}
@@ -333,7 +333,7 @@ class BootstrapSelectsTest < ActionView::TestCase
       expected = <<-HTML.strip_heredoc
         <div class="form-group">
           <label for="user_misc">Misc</label>
-          <div class="rails-bootstrap-forms-date-select">
+          <div class="rails-bemo-forms-date-select">
             <select class="form-control my-date-select" id="user_misc_1i" name="user[misc(1i)]">
               <option value=""></option>
               #{options_range(start: 2007, stop: 2017)}
@@ -358,7 +358,7 @@ class BootstrapSelectsTest < ActionView::TestCase
       expected = <<-HTML.strip_heredoc
         <div class="form-group">
           <label for="user_misc">Misc</label>
-          <div class="rails-bootstrap-forms-time-select">
+          <div class="rails-bemo-forms-time-select">
             <input id="user_misc_1i" name="user[misc(1i)]" type="hidden" value="2012" />
             <input id="user_misc_2i" name="user[misc(2i)]" type="hidden" value="2" />
             <input id="user_misc_3i" name="user[misc(3i)]" type="hidden" value="3" />
@@ -384,7 +384,7 @@ class BootstrapSelectsTest < ActionView::TestCase
         <input name="utf8" type="hidden" value="&#x2713;"/>
         <div class="form-group">
           <label for="user_misc">Misc</label>
-          <div class="rails-bootstrap-forms-time-select">
+          <div class="rails-bemo-forms-time-select">
             <input id="user_misc_1i" name="user[misc(1i)]" type="hidden" value="2012" />
             <input id="user_misc_2i" name="user[misc(2i)]" type="hidden" value="2" />
             <input id="user_misc_3i" name="user[misc(3i)]" type="hidden" value="3" />
@@ -400,7 +400,7 @@ class BootstrapSelectsTest < ActionView::TestCase
         </div>
       </form>
       HTML
-      assert_equivalent_xml expected, bootstrap_form_for(@user) { |f| f.time_select(:misc) }
+      assert_equivalent_xml expected, bemo_form_for(@user) { |f| f.time_select(:misc) }
     end
   end
 
@@ -409,7 +409,7 @@ class BootstrapSelectsTest < ActionView::TestCase
       expected = <<-HTML.strip_heredoc
         <div class="form-group">
           <label for="user_misc">Misc</label>
-          <div class="rails-bootstrap-forms-time-select">
+          <div class="rails-bemo-forms-time-select">
             <input id="user_misc_1i" name="user[misc(1i)]" type="hidden" value="1" />
             <input id="user_misc_2i" name="user[misc(2i)]" type="hidden" value="1" />
             <input id="user_misc_3i" name="user[misc(3i)]" type="hidden" value="1" />
@@ -434,7 +434,7 @@ class BootstrapSelectsTest < ActionView::TestCase
       expected = <<-HTML.strip_heredoc
         <div class="form-group">
           <label for="user_misc">Misc</label>
-          <div class="rails-bootstrap-forms-time-select">
+          <div class="rails-bemo-forms-time-select">
             <input id="user_misc_1i" name="user[misc(1i)]" type="hidden" value="1" />
             <input id="user_misc_2i" name="user[misc(2i)]" type="hidden" value="1" />
             <input id="user_misc_3i" name="user[misc(3i)]" type="hidden" value="1" />
@@ -459,7 +459,7 @@ class BootstrapSelectsTest < ActionView::TestCase
       expected = <<-HTML.strip_heredoc
         <div class="form-group">
           <label for="user_misc">Misc</label>
-          <div class="rails-bootstrap-forms-datetime-select">
+          <div class="rails-bemo-forms-datetime-select">
             <select class="form-control" id="user_misc_1i" name="user[misc(1i)]">
               #{options_range(start: 2007, stop: 2017, selected: 2012)}
             </select>
@@ -492,7 +492,7 @@ class BootstrapSelectsTest < ActionView::TestCase
         <input name="utf8" type="hidden" value="&#x2713;"/>
         <div class="form-group">
           <label for="user_misc">Misc</label>
-          <div class="rails-bootstrap-forms-datetime-select">
+          <div class="rails-bemo-forms-datetime-select">
             <select class="form-control is-invalid" id="user_misc_1i" name="user[misc(1i)]">
               #{options_range(start: 2007, stop: 2017, selected: 2012)}
             </select>
@@ -515,7 +515,7 @@ class BootstrapSelectsTest < ActionView::TestCase
         </div>
       </form>
       HTML
-      assert_equivalent_xml expected, bootstrap_form_for(@user) { |f| f.datetime_select(:misc) }
+      assert_equivalent_xml expected, bemo_form_for(@user) { |f| f.datetime_select(:misc) }
     end
   end
 
@@ -524,7 +524,7 @@ class BootstrapSelectsTest < ActionView::TestCase
       expected = <<-HTML.strip_heredoc
         <div class="form-group">
           <label for="user_misc">Misc</label>
-          <div class="rails-bootstrap-forms-datetime-select">
+          <div class="rails-bemo-forms-datetime-select">
             <select class="form-control" id="user_misc_1i" name="user[misc(1i)]">
               <option value=""></option>
               #{options_range(start: 2007, stop: 2017)}
@@ -559,7 +559,7 @@ class BootstrapSelectsTest < ActionView::TestCase
       expected = <<-HTML.strip_heredoc
         <div class="form-group">
           <label for="user_misc">Misc</label>
-          <div class="rails-bootstrap-forms-datetime-select">
+          <div class="rails-bemo-forms-datetime-select">
             <select class="form-control my-datetime-select" id="user_misc_1i" name="user[misc(1i)]">
               <option value=""></option>
               #{options_range(start: 2007, stop: 2017)}

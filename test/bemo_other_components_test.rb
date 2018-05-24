@@ -1,7 +1,7 @@
 require_relative "./test_helper"
 
-class BootstrapOtherComponentsTest < ActionView::TestCase
-  include BootstrapForm::Helper
+class BemoOtherComponentsTest < ActionView::TestCase
+  include BemoForm::Helper
 
   setup :setup_test_fixture
 

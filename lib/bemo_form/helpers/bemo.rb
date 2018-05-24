@@ -1,6 +1,6 @@
-module BootstrapForm
+module BemoForm
   module Helpers
-    module Bootstrap
+    module Bemo
       def submit(name = nil, options = {})
         options.reverse_merge! class: 'btn btn-secondary'
         super(name, options)
@@ -23,7 +23,7 @@ module BootstrapForm
       end
 
       def error_summary
-        content_tag :ul, class: 'rails-bootstrap-forms-error-summary' do
+        content_tag :ul, class: 'rails-bemo-forms-error-summary' do
           object.errors.full_messages.each do |error|
             concat content_tag(:li, error)
           end
@@ -55,7 +55,7 @@ module BootstrapForm
 
         static_options[:value] = object.send(name) if static_options[:value].nil?
 
-        text_field_with_bootstrap(name, static_options)
+        text_field_with_bemo(name, static_options)
       end
 
       def custom_control(*args, &block)

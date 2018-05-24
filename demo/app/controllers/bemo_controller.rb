@@ -1,4 +1,4 @@
-class BootstrapController < ApplicationController
+class BemoController < ApplicationController
 
   def form
     @collection = [

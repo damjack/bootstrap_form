@@ -1,4 +1,4 @@
-module BootstrapHelper
+module BemoHelper
 
   def form_with_source(&block)
     form_html = capture(&block)

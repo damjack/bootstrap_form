@@ -1,0 +1,10 @@
+.rails-bemo-forms-date-select select,
+.rails-bemo-forms-time-select select,
+.rails-bemo-forms-datetime-select select {
+  display: inline-block;
+  width: auto;
+}
+
+.rails-bemo-forms-error-summary {
+  margin-top: 10px;
+}

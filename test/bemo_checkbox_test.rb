@@ -1,7 +1,7 @@
 require_relative "./test_helper"
 
-class BootstrapCheckboxTest < ActionView::TestCase
-  include BootstrapForm::Helper
+class BemoCheckboxTest < ActionView::TestCase
+  include BemoForm::Helper
 
   setup :setup_test_fixture
 

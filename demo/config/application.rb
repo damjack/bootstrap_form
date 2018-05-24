@@ -3,7 +3,7 @@ require_relative 'boot'
 require 'rails/all'
 
 Bundler.require(*Rails.groups)
-require "bootstrap_form"
+require "bemo_form"
 
 module Dummy
   class Application < Rails::Application

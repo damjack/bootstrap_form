@@ -1,7 +1,7 @@
 require_relative "./test_helper"
 
-class BootstrapRadioButtonTest < ActionView::TestCase
-  include BootstrapForm::Helper
+class BemoRadioButtonTest < ActionView::TestCase
+  include BemoForm::Helper
 
   setup :setup_test_fixture
 

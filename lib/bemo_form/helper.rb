@@ -1,8 +1,8 @@
-module BootstrapForm
+module BemoForm
   module Helper
 
-    def bootstrap_form_for(object, options = {}, &block)
-      options.reverse_merge!({builder: BootstrapForm::FormBuilder})
+    def bemo_form_for(object, options = {}, &block)
+      options.reverse_merge!({builder: BemoForm::FormBuilder})
 
       options = process_options(options)
 
@@ -11,14 +11,14 @@ module BootstrapForm
       end
     end
 
-    def bootstrap_form_tag(options = {}, &block)
+    def bemo_form_tag(options = {}, &block)
       options[:acts_like_form_tag] = true
 
-      bootstrap_form_for("", options, &block)
+      bemo_form_for("", options, &block)
     end
 
-    def bootstrap_form_with(options = {}, &block)
-      options.reverse_merge!(builder: BootstrapForm::FormBuilder)
+    def bemo_form_with(options = {}, &block)
+      options.reverse_merge!(builder: BemoForm::FormBuilder)
 
       options = process_options(options)
 

@@ -1,7 +1,7 @@
 require_relative "./test_helper"
 
-class BootstrapFieldsTest < ActionView::TestCase
-  include BootstrapForm::Helper
+class BemoFieldsTest < ActionView::TestCase
+  include BemoForm::Helper
 
   setup :setup_test_fixture
 
@@ -111,7 +111,7 @@ class BootstrapFieldsTest < ActionView::TestCase
       </div>
     </form>
     HTML
-    assert_equivalent_xml expected, bootstrap_form_for(@user) { |f| f.file_field(:misc) }
+    assert_equivalent_xml expected, bemo_form_for(@user) { |f| f.file_field(:misc) }
   end
 
   test "hidden fields are supported" do
@@ -265,10 +265,10 @@ class BootstrapFieldsTest < ActionView::TestCase
     assert_equivalent_xml expected, @builder.week_field(:misc)
   end
 
-  test "bootstrap_form_for helper works for associations" do
+  test "bemo_form_for helper works for associations" do
     @user.address = Address.new(street: '123 Main Street')
 
-    output = bootstrap_form_for(@user) do |f|
+    output = bemo_form_for(@user) do |f|
       f.fields_for :address do |af|
         af.text_field(:street)
       end
@@ -286,10 +286,10 @@ class BootstrapFieldsTest < ActionView::TestCase
     assert_equivalent_xml expected, output
   end
 
-  test "bootstrap_form_for helper works for serialized hash attributes" do
+  test "bemo_form_for helper works for serialized hash attributes" do
     @user.preferences = { favorite_color: "cerulean" }
 
-    output = bootstrap_form_for(@user) do |f|
+    output = bemo_form_for(@user) do |f|
       f.fields_for :preferences do |builder|
         builder.text_field :favorite_color, value: @user.preferences[:favorite_color]
       end
@@ -310,7 +310,7 @@ class BootstrapFieldsTest < ActionView::TestCase
   test "fields_for correctly passes horizontal style from parent builder" do
     @user.address = Address.new(street: '123 Main Street')
 
-    output = bootstrap_form_for(@user, layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-10') do |f|
+    output = bemo_form_for(@user, layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-10') do |f|
       f.fields_for :address do |af|
         af.text_field(:street)
       end
@@ -333,8 +333,8 @@ class BootstrapFieldsTest < ActionView::TestCase
   test "fields_for correctly passes inline style from parent builder" do
     @user.address = Address.new(street: '123 Main Street')
 
-    # NOTE: This test works with even if you use `fields_for_without_bootstrap`
-    output = bootstrap_form_for(@user, layout: :inline) do |f|
+    # NOTE: This test works with even if you use `fields_for_without_bemo`
+    output = bemo_form_for(@user, layout: :inline) do |f|
       f.fields_for :address do |af|
         af.text_field(:street)
       end
@@ -356,7 +356,7 @@ class BootstrapFieldsTest < ActionView::TestCase
     test "fields correctly uses options from parent builder" do
       @user.address = Address.new(street: '123 Main Street')
 
-      bootstrap_form_with(model: @user,
+      bemo_form_with(model: @user,
                           control_col: "control-style",
                           inline_errors: false,
                           label_col: "label-style",
@@ -374,16 +374,16 @@ class BootstrapFieldsTest < ActionView::TestCase
     end
   end
 
-  test "fields_for_without_bootstrap does not use options from parent builder" do
+  test "fields_for_without_bemo does not use options from parent builder" do
     @user.address = Address.new(street: '123 Main Street')
 
-    bootstrap_form_for(@user,
+    bemo_form_for(@user,
                        control_col: "control-style",
                        inline_errors: false,
                        label_col: "label-style",
                        label_errors: true,
                        layout: :inline) do |f|
-      f.fields_for_without_bootstrap :address do |af|
+      f.fields_for_without_bemo :address do |af|
         af.text_field(:street)
         assert_not_equal "control-style", af.control_col
         assert_not_equal false, af.inline_errors

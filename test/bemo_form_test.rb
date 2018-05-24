@@ -1,7 +1,7 @@
 require_relative "./test_helper"
 
-class BootstrapFormTest < ActionView::TestCase
-  include BootstrapForm::Helper
+class BemoFormTest < ActionView::TestCase
+  include BemoForm::Helper
 
   setup :setup_test_fixture
 
@@ -11,7 +11,7 @@ class BootstrapFormTest < ActionView::TestCase
         <input name="utf8" type="hidden" value="&#x2713;" />
       </form>
     HTML
-    assert_equivalent_xml expected, bootstrap_form_for(@user) { |f| nil }
+    assert_equivalent_xml expected, bemo_form_for(@user) { |f| nil }
   end
 
   test "default-style form fields layout horizontal" do
@@ -55,7 +55,7 @@ class BootstrapFormTest < ActionView::TestCase
     HTML
 
     collection = [Address.new(id: 1, street: 'Foo'), Address.new(id: 2, street: 'Bar')]
-    actual = bootstrap_form_for(@user) do |f|
+    actual = bemo_form_for(@user) do |f|
       f.email_field(:email, layout: :horizontal)
        .concat(f.check_box(:terms, label: 'I agree to the terms'))
        .concat(f.collection_radio_buttons(:misc, collection, :id, :street, layout: :horizontal))
@@ -101,7 +101,7 @@ class BootstrapFormTest < ActionView::TestCase
     HTML
 
     collection = [Address.new(id: 1, street: 'Foo'), Address.new(id: 2, street: 'Bar')]
-    actual = bootstrap_form_for(@user) do |f|
+    actual = bemo_form_for(@user) do |f|
       f.email_field(:email, layout: :inline)
        .concat(f.check_box(:terms, label: 'I agree to the terms', inline: true))
        .concat(f.collection_radio_buttons(:misc, collection, :id, :street, layout: :inline))
@@ -118,13 +118,13 @@ class BootstrapFormTest < ActionView::TestCase
   if  ::Rails::VERSION::STRING >= '5.1'
     # No need to test 5.2 separately for this case, since 5.2 does *not*
     # generate a default ID for the form element.
-    test "default-style forms bootstrap_form_with Rails 5.1+" do
+    test "default-style forms bemo_form_with Rails 5.1+" do
       expected = <<-HTML.strip_heredoc
         <form accept-charset="UTF-8" action="/users" data-remote="true" method="post" role="form">
           <input name="utf8" type="hidden" value="&#x2713;" />
         </form>
       HTML
-      assert_equivalent_xml expected, bootstrap_form_with(model: @user) { |f| nil }
+      assert_equivalent_xml expected, bemo_form_with(model: @user) { |f| nil }
     end
   end
 
@@ -163,7 +163,7 @@ class BootstrapFormTest < ActionView::TestCase
     HTML
 
     collection = [Address.new(id: 1, street: 'Foo'), Address.new(id: 2, street: 'Bar')]
-    actual = bootstrap_form_for(@user, layout: :inline) do |f|
+    actual = bemo_form_for(@user, layout: :inline) do |f|
       f.email_field(:email)
        .concat(f.check_box(:terms, label: 'I agree to the terms'))
        .concat(f.collection_radio_buttons(:misc, collection, :id, :street))
@@ -214,7 +214,7 @@ class BootstrapFormTest < ActionView::TestCase
     HTML
 
     collection = [Address.new(id: 1, street: 'Foo'), Address.new(id: 2, street: 'Bar')]
-    actual = bootstrap_form_for(@user, layout: :horizontal) do |f|
+    actual = bemo_form_for(@user, layout: :horizontal) do |f|
       f.email_field(:email)
        .concat(f.check_box(:terms, label: 'I agree to the terms'))
        .concat(f.collection_radio_buttons(:misc, collection, :id, :street))
@@ -259,7 +259,7 @@ class BootstrapFormTest < ActionView::TestCase
     HTML
 
     collection = [Address.new(id: 1, street: 'Foo'), Address.new(id: 2, street: 'Bar')]
-    actual = bootstrap_form_for(@user, layout: :horizontal) do |f|
+    actual = bemo_form_for(@user, layout: :horizontal) do |f|
       f.email_field(:email, layout: :default)
        .concat(f.check_box(:terms, label: 'I agree to the terms'))
        .concat(f.collection_radio_buttons(:misc, collection, :id, :street, layout: :default))
@@ -305,7 +305,7 @@ class BootstrapFormTest < ActionView::TestCase
     HTML
 
     collection = [Address.new(id: 1, street: 'Foo'), Address.new(id: 2, street: 'Bar')]
-    actual = bootstrap_form_for(@user, layout: :horizontal) do |f|
+    actual = bemo_form_for(@user, layout: :horizontal) do |f|
       f.email_field(:email, layout: :inline)
        .concat(f.check_box(:terms, label: 'I agree to the terms', inline: true))
        .concat(f.collection_radio_buttons(:misc, collection, :id, :street, layout: :inline))
@@ -328,7 +328,7 @@ class BootstrapFormTest < ActionView::TestCase
         </div>
       </form>
     HTML
-    assert_equivalent_xml expected, bootstrap_form_for(@user, layout: :horizontal, html: { class: "my-style" }) { |f| f.email_field :email }
+    assert_equivalent_xml expected, bemo_form_for(@user, layout: :horizontal, html: { class: "my-style" }) { |f| f.email_field :email }
   end
 
   test "given role attribute should not be covered by default role attribute" do
@@ -337,10 +337,10 @@ class BootstrapFormTest < ActionView::TestCase
         <input name="utf8" type="hidden" value="&#x2713;" />
       </form>
     HTML
-    assert_equivalent_xml expected, bootstrap_form_for(@user, html: { role: 'not-a-form'}) {|f| nil}
+    assert_equivalent_xml expected, bemo_form_for(@user, html: { role: 'not-a-form'}) {|f| nil}
   end
 
-  test "bootstrap_form_tag acts like a form tag" do
+  test "bemo_form_tag acts like a form tag" do
     expected = <<-HTML.strip_heredoc
       <form accept-charset="UTF-8" action="/users" method="post" role="form">
         <input name="utf8" type="hidden" value="&#x2713;" />
@@ -350,10 +350,10 @@ class BootstrapFormTest < ActionView::TestCase
         </div>
       </form>
     HTML
-    assert_equivalent_xml expected, bootstrap_form_tag(url: '/users') { |f| f.text_field :email, label: "Your Email" }
+    assert_equivalent_xml expected, bemo_form_tag(url: '/users') { |f| f.text_field :email, label: "Your Email" }
   end
 
-  test "bootstrap_form_for does not clobber custom options" do
+  test "bemo_form_for does not clobber custom options" do
     expected = <<-HTML.strip_heredoc
       <form accept-charset="UTF-8" action="/users" class="new_user" id="new_user" method="post" role="form">
         <input name="utf8" type="hidden" value="&#x2713;" />
@@ -363,10 +363,10 @@ class BootstrapFormTest < ActionView::TestCase
         </div>
       </form>
     HTML
-    assert_equivalent_xml expected, bootstrap_form_for(@user) { |f| f.text_field :email, name: 'NAME', id: "ID" }
+    assert_equivalent_xml expected, bemo_form_for(@user) { |f| f.text_field :email, name: 'NAME', id: "ID" }
   end
 
-  test "bootstrap_form_tag does not clobber custom options" do
+  test "bemo_form_tag does not clobber custom options" do
     expected = <<-HTML.strip_heredoc
       <form accept-charset="UTF-8" action="/users" method="post" role="form">
         <input name="utf8" type="hidden" value="&#x2713;" />
@@ -376,10 +376,10 @@ class BootstrapFormTest < ActionView::TestCase
         </div>
       </form>
     HTML
-    assert_equivalent_xml expected, bootstrap_form_tag(url: '/users') { |f| f.text_field :email, name: 'NAME', id: "ID" }
+    assert_equivalent_xml expected, bemo_form_tag(url: '/users') { |f| f.text_field :email, name: 'NAME', id: "ID" }
   end
 
-  test "bootstrap_form_tag allows an empty name for checkboxes" do
+  test "bemo_form_tag allows an empty name for checkboxes" do
     if ::Rails::VERSION::STRING >= '5.1'
       id = 'misc'
       name = 'misc'
@@ -397,7 +397,7 @@ class BootstrapFormTest < ActionView::TestCase
       </div>
     </form>
     HTML
-    assert_equivalent_xml expected, bootstrap_form_tag(url: '/users') { |f| f.check_box :misc }
+    assert_equivalent_xml expected, bemo_form_tag(url: '/users') { |f| f.check_box :misc }
   end
 
   test "errors display correctly and inline_errors are turned off by default when label_errors is true" do
@@ -413,7 +413,7 @@ class BootstrapFormTest < ActionView::TestCase
         </div>
       </form>
     HTML
-    assert_equivalent_xml expected, bootstrap_form_for(@user, label_errors: true) { |f| f.text_field :email }
+    assert_equivalent_xml expected, bemo_form_for(@user, label_errors: true) { |f| f.text_field :email }
   end
 
   test "errors display correctly and inline_errors can also be on when label_errors is true" do
@@ -430,7 +430,7 @@ class BootstrapFormTest < ActionView::TestCase
         </div>
       </form>
     HTML
-    assert_equivalent_xml expected, bootstrap_form_for(@user, label_errors: true, inline_errors: true) { |f| f.text_field :email }
+    assert_equivalent_xml expected, bemo_form_for(@user, label_errors: true, inline_errors: true) { |f| f.text_field :email }
   end
 
   test "label error messages use humanized attribute names" do
@@ -450,7 +450,7 @@ class BootstrapFormTest < ActionView::TestCase
           </div>
         </form>
       HTML
-      assert_equivalent_xml expected, bootstrap_form_for(@user, label_errors: true, inline_errors: true) { |f| f.text_field :email }
+      assert_equivalent_xml expected, bemo_form_for(@user, label_errors: true, inline_errors: true) { |f| f.text_field :email }
 
     ensure
       I18n.backend.store_translations(:en, {activerecord: {attributes: {user: {email: nil}}}})
@@ -464,7 +464,7 @@ class BootstrapFormTest < ActionView::TestCase
     expected = <<-HTML.strip_heredoc
       <div class="alert alert-danger">
         <p>Please fix the following errors:</p>
-        <ul class="rails-bootstrap-forms-error-summary">
+        <ul class="rails-bemo-forms-error-summary">
           <li>Email can&#39;t be blank</li>
           <li>Email is too short (minimum is 5 characters)</li>
           <li>Terms must be accepted</li>
@@ -481,7 +481,7 @@ class BootstrapFormTest < ActionView::TestCase
     expected = <<-HTML.strip_heredoc
       <div class="my-css-class">
         <p>Please fix the following errors:</p>
-        <ul class="rails-bootstrap-forms-error-summary">
+        <ul class="rails-bemo-forms-error-summary">
           <li>Email can&#39;t be blank</li>
           <li>Email is too short (minimum is 5 characters)</li>
           <li>Terms must be accepted</li>
@@ -495,7 +495,7 @@ class BootstrapFormTest < ActionView::TestCase
     @user.email = nil
     assert @user.invalid?
 
-    output = bootstrap_form_for(@user, inline_errors: false) do |f|
+    output = bemo_form_for(@user, inline_errors: false) do |f|
       f.alert_message('Please fix the following errors:')
     end
 
@@ -504,7 +504,7 @@ class BootstrapFormTest < ActionView::TestCase
         <input name="utf8" type="hidden" value="&#x2713;" />
         <div class="alert alert-danger">
           <p>Please fix the following errors:</p>
-          <ul class="rails-bootstrap-forms-error-summary">
+          <ul class="rails-bemo-forms-error-summary">
             <li>Email can&#39;t be blank</li>
             <li>Email is too short (minimum is 5 characters)</li>
             <li>Terms must be accepted</li>
@@ -519,7 +519,7 @@ class BootstrapFormTest < ActionView::TestCase
     @user.email = nil
     assert @user.invalid?
 
-    output = bootstrap_form_for(@user, inline_errors: false) do |f|
+    output = bemo_form_for(@user, inline_errors: false) do |f|
       f.alert_message('Please fix the following errors:', error_summary: false)
     end
 
@@ -538,7 +538,7 @@ class BootstrapFormTest < ActionView::TestCase
     @user.email = nil
     assert @user.invalid?
 
-    output = bootstrap_form_for(@user, inline_errors: true) do |f|
+    output = bemo_form_for(@user, inline_errors: true) do |f|
       f.alert_message('Please fix the following errors:', error_summary: true)
     end
 
@@ -547,7 +547,7 @@ class BootstrapFormTest < ActionView::TestCase
         <input name="utf8" type="hidden" value="&#x2713;" />
         <div class="alert alert-danger">
           <p>Please fix the following errors:</p>
-          <ul class="rails-bootstrap-forms-error-summary">
+          <ul class="rails-bemo-forms-error-summary">
             <li>Email can&#39;t be blank</li>
             <li>Email is too short (minimum is 5 characters)</li>
             <li>Terms must be accepted</li>
@@ -563,7 +563,7 @@ class BootstrapFormTest < ActionView::TestCase
     assert @user.invalid?
 
     expected = <<-HTML.strip_heredoc
-      <ul class="rails-bootstrap-forms-error-summary">
+      <ul class="rails-bemo-forms-error-summary">
         <li>Email can&#39;t be blank</li>
         <li>Email is too short (minimum is 5 characters)</li>
         <li>Terms must be accepted</li>
@@ -594,7 +594,7 @@ class BootstrapFormTest < ActionView::TestCase
         </div>
       </form>
     HTML
-    assert_equivalent_xml expected, bootstrap_form_for(@user, layout: :horizontal) { |f| f.email_field :email, label_col: 'col-sm-1' }
+    assert_equivalent_xml expected, bemo_form_for(@user, layout: :horizontal) { |f| f.email_field :email, label_col: 'col-sm-1' }
   end
 
   test "offset for form group without label respects label width for horizontal forms" do
@@ -608,7 +608,7 @@ class BootstrapFormTest < ActionView::TestCase
         </div>
       </form>
     HTML
-    assert_equivalent_xml expected, bootstrap_form_for(@user, layout: :horizontal, label_col: 'col-md-2', control_col: 'col-md-10') { |f| f.form_group { f.submit } }
+    assert_equivalent_xml expected, bemo_form_for(@user, layout: :horizontal, label_col: 'col-md-2', control_col: 'col-md-10') { |f| f.form_group { f.submit } }
   end
 
   test "custom input width for horizontal forms" do
@@ -623,14 +623,14 @@ class BootstrapFormTest < ActionView::TestCase
         </div>
       </form>
     HTML
-    assert_equivalent_xml expected, bootstrap_form_for(@user, layout: :horizontal) { |f| f.email_field :email, control_col: 'col-sm-5' }
+    assert_equivalent_xml expected, bemo_form_for(@user, layout: :horizontal) { |f| f.email_field :email, control_col: 'col-sm-5' }
   end
 
-  test "the field contains the error and is not wrapped in div.field_with_errors when bootstrap_form_for is used" do
+  test "the field contains the error and is not wrapped in div.field_with_errors when bemo_form_for is used" do
     @user.email = nil
     assert @user.invalid?
 
-    output = bootstrap_form_for(@user) do |f|
+    output = bemo_form_for(@user) do |f|
       f.text_field(:email, help: 'This is required')
     end
 
@@ -651,7 +651,7 @@ class BootstrapFormTest < ActionView::TestCase
     @user.email = nil
     assert @user.invalid?
 
-    output = form_for(@user, builder: BootstrapForm::FormBuilder) do |f|
+    output = form_for(@user, builder: BemoForm::FormBuilder) do |f|
       f.text_field(:email, help: 'This is required')
     end
 
@@ -672,11 +672,11 @@ class BootstrapFormTest < ActionView::TestCase
     assert_equivalent_xml expected, output
   end
 
-  test "help is preserved when inline_errors: false is passed to bootstrap_form_for" do
+  test "help is preserved when inline_errors: false is passed to bemo_form_for" do
     @user.email = nil
     assert @user.invalid?
 
-    output = bootstrap_form_for(@user, inline_errors: false) do |f|
+    output = bemo_form_for(@user, inline_errors: false) do |f|
       f.text_field(:email, help: 'This is required')
     end
 
@@ -697,7 +697,7 @@ class BootstrapFormTest < ActionView::TestCase
     begin
       I18n.backend.store_translations(:en, {activerecord: {help: {user: {email_html: "This is <strong>useful</strong> help"}}}})
 
-      output = bootstrap_form_for(@user) do |f|
+      output = bemo_form_for(@user) do |f|
         f.text_field(:email)
       end
 
@@ -718,7 +718,7 @@ class BootstrapFormTest < ActionView::TestCase
   end
 
   test "allows the form object to be nil" do
-    builder = BootstrapForm::FormBuilder.new :other_model, nil, self, {}
+    builder = BemoForm::FormBuilder.new :other_model, nil, self, {}
     expected = <<-HTML.strip_heredoc
       <div class="form-group">
         <label for="other_model_email">Email</label>

@@ -1,4 +1,4 @@
-module BootstrapForm
+module BemoForm
   # This module implements the old ActiveSupport alias_method_chain feature
   # with a new name, and without the deprecation warnings. In ActiveSupport 5+,
   # this style of patching was deprecated in favor of Module.prepend. But
@@ -6,10 +6,10 @@ module BootstrapForm
   # support. So we continue to use of alias_method_chain, albeit with a
   # different name to avoid collisions.
   module Aliasing
-    # This code is copied and pasted from ActiveSupport, but with :bootstrap
+    # This code is copied and pasted from ActiveSupport, but with :bemo
     # hardcoded as the feature name, and with the deprecation warning removed.
-    def bootstrap_method_alias(target)
-      feature = :bootstrap
+    def bemo_method_alias(target)
+      feature = :bemo
 
       # Strip out punctuation on predicates, bang or writer methods since
       # e.g. target?_without_feature is not a valid method name.

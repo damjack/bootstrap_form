@@ -1,7 +1,7 @@
 require_relative "./test_helper"
 
 class SpecialFormClassModelsTest < ActionView::TestCase
-  include BootstrapForm::Helper
+  include BemoForm::Helper
 
   test "Anonymous models are supported for form builder" do
     user_klass = Class.new(User)
@@ -10,8 +10,8 @@ class SpecialFormClassModelsTest < ActionView::TestCase
     end
 
     @user = user_klass.new(email: 'steve@example.com', password: 'secret', comments: 'my comment')
-    @builder = BootstrapForm::FormBuilder.new(:user, @user, self, {})
-    @horizontal_builder = BootstrapForm::FormBuilder.new(:user, @user, self, {layout: :horizontal, label_col: "col-sm-2", control_col: "col-sm-10"})
+    @builder = BemoForm::FormBuilder.new(:user, @user, self, {})
+    @horizontal_builder = BemoForm::FormBuilder.new(:user, @user, self, {layout: :horizontal, label_col: "col-sm-2", control_col: "col-sm-10"})
     I18n.backend.store_translations(:en, {activerecord: {help: {user: {password: "A good password should be at least six characters long"}}}})
 
     expected = <<-HTML.strip_heredoc
@@ -25,8 +25,8 @@ class SpecialFormClassModelsTest < ActionView::TestCase
 
   test "Nil models are supported for form builder" do
     @user = nil
-    @builder = BootstrapForm::FormBuilder.new(:user, @user, self, {})
-    @horizontal_builder = BootstrapForm::FormBuilder.new(:user, @user, self, {layout: :horizontal, label_col: "col-sm-2", control_col: "col-sm-10"})
+    @builder = BemoForm::FormBuilder.new(:user, @user, self, {})
+    @horizontal_builder = BemoForm::FormBuilder.new(:user, @user, self, {layout: :horizontal, label_col: "col-sm-2", control_col: "col-sm-10"})
     I18n.backend.store_translations(:en, {activerecord: {help: {user: {password: "A good password should be at least six characters long"}}}})
 
     expected = <<-HTML.strip_heredoc
@@ -42,8 +42,8 @@ class SpecialFormClassModelsTest < ActionView::TestCase
     user_klass = FauxUser
 
     @user = user_klass.new(email: 'steve@example.com', password: 'secret', comments: 'my comment')
-    @builder = BootstrapForm::FormBuilder.new(:user, @user, self, {})
-    @horizontal_builder = BootstrapForm::FormBuilder.new(:user, @user, self, {layout: :horizontal, label_col: "col-sm-2", control_col: "col-sm-10"})
+    @builder = BemoForm::FormBuilder.new(:user, @user, self, {})
+    @horizontal_builder = BemoForm::FormBuilder.new(:user, @user, self, {layout: :horizontal, label_col: "col-sm-2", control_col: "col-sm-10"})
     I18n.backend.store_translations(:en, {activerecord: {help: {faux_user: {password: "A good password should be at least six characters long"}}}})
 
     expected = <<-HTML.strip_heredoc
