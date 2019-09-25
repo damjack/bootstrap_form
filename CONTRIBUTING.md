@@ -1,14 +1,14 @@
 # Contributing
 
-The release of Bootstrap 4 and Rails 5.1 have implications for the future
-direction of `bootstrap_form`. Don't worry. We plan to move this gem forward to
-Bootstrap 4 and to support Rails 5.1 and beyond. If you're thinking of
-contributing to `bootstrap_form`, please read
-[issue #361](https://github.com/bootstrap-ruby/bootstrap_form/issues/361).
+The release of Bemo 4 and Rails 5.1 have implications for the future
+direction of `bemo_form`. Don't worry. We plan to move this gem forward to
+Bemo 4 and to support Rails 5.1 and beyond. If you're thinking of
+contributing to `bemo_form`, please read
+[issue #361](https://github.com/damjack/bemo_form/issues/361).
 
 Your comments are welcome.
 
-Thanks so much for considering a contribution to bootstrap_form. We love pull requests!
+Thanks so much for considering a contribution to bemo_form. We love pull requests!
 
 Here's a quick guide for contributing:
 
@@ -54,4 +54,4 @@ merged into master brach. Eventually gem will be published with your changes.
 
 ---
 
-Thanks to all the great contributors over the years: https://github.com/bootstrap-ruby/bootstrap_form/graphs/contributors
+Thanks to all the great contributors over the years: https://github.com/bemo-ruby/bemo_form/graphs/contributors
