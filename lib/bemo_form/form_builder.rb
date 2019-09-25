@@ -121,7 +121,7 @@ module BemoForm
       check_box_classes << "position-static" if options[:skip_label] || options[:hide_label]
       if options[:custom]
         validation = nil
-        validation = "is-invalid" if has_error?(name)
+        validation = "--invalid" if has_error?(name)
         check_box_options[:class] = (["custom-control-input", validation] + check_box_classes).compact.join(' ')
       else
         check_box_options[:class] = (["form-check-input"] + check_box_classes).compact.join(' ')
@@ -337,7 +337,7 @@ module BemoForm
     end
 
     def control_class
-      "form-control"
+      "form__field"
     end
 
     def feedback_class
@@ -383,7 +383,7 @@ module BemoForm
       css_options = html_options || options
       control_classes = css_options.delete(:control_class) { control_class }
       css_options[:class] = [control_classes, css_options[:class]].compact.join(" ")
-      css_options[:class] << " is-invalid" if has_error?(method)
+      css_options[:class] << "--invalid" if has_error?(method)
 
       options = convert_form_tag_options(method, options) if acts_like_form_tag
 
@@ -458,7 +458,7 @@ module BemoForm
       classes = [options[:class]]
 
       if layout_horizontal?(group_layout)
-        classes << "col-form-label"
+        classes << "form__label"
         classes << (custom_label_col || label_col)
       elsif layout_inline?(group_layout)
         classes << "mr-sm-2"
